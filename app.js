@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var methodOver = require("method-override");
 var mongoose = require("mongoose");
 // // var bootstrap = require('bootstrap');
 
@@ -11,6 +12,7 @@ mongoose.connect("mongodb://localhost/node_blog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOver("_method"));
 
 //Mongoose/model config
 var blogSchema = new mongoose.Schema({
@@ -71,6 +73,29 @@ app.get("/blog/:id", function(req, res){
 		}
 	});
 });
+
+//EDIT ROUTE
+app.get("/blog/:id/edit", function(req, res){
+	Blog.findById(req.params.id, function(err, foundBlog){
+		if(err){
+			res.redirect("/blog");
+		} else{		
+			res.render("edit", {blog: foundBlog});
+		}
+	});
+})
+
+//UPDATE ROUTE
+app.put("/blog/:id", function(req, res){
+	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+		if(err){
+			res.redirect("/blog");
+		} else {
+			res.redirect("/blog/" + req.params.id);
+		}
+	});
+});
+
 
 app.listen(4000, function () {
   console.log('Our Site is on Port 4000');
