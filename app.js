@@ -61,6 +61,17 @@ app.post("/blog", function(req,res){
 	});
 });
 
-app.listen(3000, function () {
-  console.log('Our Site is on Port 3000');
+//SHOW ROUTE'
+app.get("/blog/:id", function(req, res){
+	Blog.findById(req.params.id, function(err, foundBlog){
+		if(err){
+			res.redirect("/blog");
+		} else{
+			res.render("show",{blog: foundBlog});
+		}
+	});
+});
+
+app.listen(4000, function () {
+  console.log('Our Site is on Port 4000');
 });
