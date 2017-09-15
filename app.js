@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var methodOver = require("method-override");
 var expSan = require("express-sanitizer");
 var mongoose = require("mongoose");
+var port = process.env.PORT || 3000;
 // // var bootstrap = require('bootstrap');
 
 
@@ -112,6 +113,6 @@ app.delete("/blog/:id", function(req, res){
 });
 
 
-app.listen(4000, function () {
-  console.log('Our Site is on Port 4000');
+app.listen(port, function () {
+ console.log('Express server is up on port ' + port);
 });
