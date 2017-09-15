@@ -9,7 +9,7 @@ var mongoose = require("mongoose");
 
 
 //App Config
-mongoose.connect("mongodb://localhost/node_blog");
+mongoose.connect("mongodb://node_blog:pass@ds139124.mlab.com:39124/node_blog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
