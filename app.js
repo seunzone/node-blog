@@ -10,7 +10,7 @@ var port = process.env.PORT || 3000;
 
 
 //App Config
-mongoose.connect("mongodb://node_blog:pass@ds139124.mlab.com:39124/node_blog");
+mongoose.connect("mongodb://<user>:<password>@ds139124.mlab.com:39124/node_blog");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
